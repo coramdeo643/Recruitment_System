@@ -47,12 +47,27 @@ public class UserDAO {
         return userList;
     }
 
+    // 유저 인증
+    public void authenticateUser(String name) throws SQLException {
+        String checkSql = "select * from user where user_name = ? ";
+
+        try(Connection conn = Database.getConnection();) {
+            PreparedStatement pstmt = conn.prepareStatement(checkSql);
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(!rs.next()) {
+                throw new SQLException("해당 유저는 존재하지 않습니다.");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
         List<User> userList = new ArrayList<>();
 
         try {
-            userDAO.addUser(new User(2, "김철수", "a@naver.com", "asd1234", "부산시 부산진구"));
+            userDAO.addUser(new User(1, "김철수", "a@naver.com", "asd1234", "부산시 부산진구"));
             userList = userDAO.getAllUser();
 
             for (int i = 0; i < userList.size(); i++) {
