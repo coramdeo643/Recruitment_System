@@ -52,7 +52,7 @@ public class UserDAO {
         List<User> userList = new ArrayList<>();
 
         try {
-            userDAO.addUser(new User(1, "김철수", "a@naver.com", "asd1234", "부산시 부산진구"));
+            userDAO.addUser(new User(2, "김철수", "a@naver.com", "asd1234", "부산시 부산진구"));
             userList = userDAO.getAllUser();
 
             for (int i = 0; i < userList.size(); i++) {
